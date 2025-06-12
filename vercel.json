@@ -1,14 +1,15 @@
 {
   "version": 2,
-  "builds": [
-    {
-      "src": "package.json",
-      "use": "@vercel/static-build",
-      "config": {
-        "distDir": "dist"
-      }
+  "buildCommand": "npm run build",
+  "outputDirectory": "dist",
+  "installCommand": "npm install --production=false",
+  "functions": {
+    "api/index.js": {
+      "runtime": "@vercel/node",
+      "memory": 1024,
+      "maxDuration": 30
     }
-  ],
+  },
   "rewrites": [
     {
       "source": "/api/(.*)",
@@ -49,8 +50,5 @@
   ],
   "env": {
     "NODE_ENV": "production"
-  },
-  "buildCommand": "npm run build",
-  "outputDirectory": "dist",
-  "installCommand": "npm install --production=false"
+  }
 }
